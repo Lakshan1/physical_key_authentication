@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Login Page</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.15/dist/tailwind.min.css">
+</head>
+<body class="bg-gray-100">
+
+    <div class="min-h-screen flex items-center justify-center">
+      <div class="max-w-md w-full space-y-8 p-8 bg-white rounded-lg shadow-md">
+        <h2 class="text-2xl font-bold text-center">Sign up for an account</h2>
+        <form class="space-y-4" action="{% url 'signup' %}" method="POST">
+          {% csrf_token %}
+          <div>
+            <label class="block text-gray-700 font-bold mb-2" for="username">
+              Username
+            </label>
+            {{form.username}}
+          </div>
+          <div>
+            <label class="block text-gray-700 font-bold mb-2" for="email">
+              Email
+            </label>
+            {{form.email}}
+          </div>
+          <div>
+            <label class="block text-gray-700 font-bold mb-2" for="password">
+              Password
+            </label>
+            {{form.password1}}
+          </div>
+          <div>
+            <label class="block text-gray-700 font-bold mb-2" for="password">
+              Confirm Password
+            </label>
+            {{form.password2}}
+          </div>
+          <div>
+            <label for="physical_key" class="flex items-center">
+              <input id="physical_key" name="physical_key" type="checkbox" class="h-4 w-4 text-indigo-600 focus:ring-indigo-500 border-gray-300 rounded mt-2">
+              <span class="ml-2 text-sm text-gray-600 mt-2">Use Physical Key Authentication</span>
+            </label>
+          </div>
+          <div>
+            <button type="submit" 
+              class="mb-2 w-full py-2 px-4 bg-blue-600 text-white rounded-lg 
+                hover:bg-blue-700 focus:outline-none focus:shadow-outline-blue">
+              Sign In
+            </button>
+          </div>
+          <a href="{% url 'login' %}">already have an account?</a>
+        </form>
+      </div>
+    </div>
+
+</body>
+</html>

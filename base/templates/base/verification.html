@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Verification</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.15/dist/tailwind.min.css">
+  <!-- Load jQuery from the Google Hosted Libraries CDN -->
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+
+</head>
+<body class="flex flex-col items-center justify-center h-screen">
+  <h1 class="text-4xl font-bold text-center mb-8">Plug your physical key and press the verify button</h1>
+  <button class="mb-2 w-60 py-2 px-4 bg-green-600 text-white rounded-lg 
+  hover:bg-green-700 focus:outline-none focus:shadow-outline-blue" onclick="openApp(`{{unique_id}}`)">Verify</button>
+
+  <script>
+    function openApp(id){
+        window.location.href = `authenticator://start?id=${id}`
+    }
+
+    // Define a function that checks the Django URL and updates the current URL
+    function checkDjangoURL() {
+      // Make an AJAX request to the Django URL
+      $.ajax({
+          url: '/check-authentication/',
+          type: 'GET',
+          dataType: 'json',
+          success: function(data) {
+              // Check if any changes have occurred
+              console.log("success")
+              if(data.data){
+                console.log(data.data)
+              }else{
+                window.location.href = data.url
+              }
+          }
+      });
+    }
+
+    // Call the checkDjangoURL function every 5 seconds
+    setInterval(checkDjangoURL, 5000);
+  </script>
+</body>
+</html>
